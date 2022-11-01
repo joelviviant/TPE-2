@@ -6,16 +6,16 @@ require_once './controllers/-api.controller.php';
 $router = new Router();
 
 // Productos
-$router->addRoute('tasks', 'GET', 'TaskApiController', 'getTasks');
-$router->addRoute('tasks/:ID', 'GET', 'TaskApiController', 'getTask');
-$router->addRoute('tasks/:ID', 'DELETE', 'TaskApiController', 'deleteTask');
-$router->addRoute('tasks', 'POST', 'TaskApiController', 'insertTask'); 
+$router->addRoute('products', 'GET', 'TaskApiController', 'getTasks');
+$router->addRoute('products/:ID', 'GET', 'TaskApiController', 'getTask');
+$router->addRoute('products/:ID', 'DELETE', 'TaskApiController', 'deleteTask');
+$router->addRoute('products', 'POST', 'TaskApiController', 'insertTask'); 
 
 // Categorias
-$router->addRoute('tasks', 'GET', 'TaskApiController', 'getTasks');
-$router->addRoute('tasks/:ID', 'GET', 'TaskApiController', 'getTask');
-$router->addRoute('tasks/:ID', 'DELETE', 'TaskApiController', 'deleteTask');
-$router->addRoute('tasks', 'POST', 'TaskApiController', 'insertTask'); 
+$router->addRoute('categories', 'GET', 'TaskApiController', 'getTasks');
+$router->addRoute('categories/:ID', 'GET', 'TaskApiController', 'getTask');
+$router->addRoute('categories/:ID', 'DELETE', 'TaskApiController', 'deleteTask');
+$router->addRoute('categories', 'POST', 'TaskApiController', 'insertTask'); 
 
 
 // ejecuta la ruta (sea cual sea)
