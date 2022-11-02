@@ -5,32 +5,23 @@ class TaskModel {
     private $db;
 
     public function __construct() {
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_tasks;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_cart;charset=utf8', 'root', '');
     }
 
-    /**
-     * Devuelve la lista de tareas completa.
-     */
+   
     public function getAll() {
-        // 1. abro conexión a la DB
-        // ya esta abierta por el constructor de la clase
-
-        // 2. ejecuto la sentencia (2 subpasos)
-        $query = $this->db->prepare("SELECT * FROM task");
-        $query->execute();
-
-        // 3. obtengo los resultados
-        $tasks = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos
-        
-        return $tasks;
+  
+        $query = $this->db->prepare( "select * from categoria ");
+        $query -> execute();
+        $categories = $query->fetchAll(PDO::FETCH_OBJ);
+        return $categories; 
     }
 
     public function get($id) {
-        $query = $this->db->prepare("SELECT * FROM task WHERE id = ?");
-        $query->execute([$id]);
-        $task = $query->fetch(PDO::FETCH_OBJ);
-        
-        return $task;
+        $query = $this->db->prepare( "select * from categoria WHERE id_categoria=?");
+        $query -> execute(array($id));
+        $category = $query->fetch(PDO::FETCH_OBJ);
+        return $category; 
     }
 
     /**
@@ -43,13 +34,10 @@ class TaskModel {
         return $this->db->lastInsertId();
     }
 
-
-    /**
-     * Elimina una tarea dado su id.
-     */
     function delete($id) {
-        $query = $this->db->prepare('DELETE FROM task WHERE id = ?');
-        $query->execute([$id]);
+        $query = $this->db->prepare("DELETE FROM categoria WHERE id_categoria=?");
+        $query->execute(array($id));
+
     }
 
     public function finalize($id) {
