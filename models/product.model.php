@@ -1,45 +1,33 @@
 <?php
 
-class TaskModel {
+class ProductModel {
 
     private $db;
 
     public function __construct() {
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_tasks;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_cart;charset=utf8', 'root', '');
     }
 
-    /**
-     * Devuelve la lista de tareas completa.
-     */
     public function getAll() {
-        // 1. abro conexión a la DB
-        // ya esta abierta por el constructor de la clase
-
-        // 2. ejecuto la sentencia (2 subpasos)
-        $query = $this->db->prepare("SELECT * FROM task");
-        $query->execute();
-
-        // 3. obtengo los resultados
-        $tasks = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos
-        
-        return $tasks;
+        $query = $this->db->prepare( "select p.id,p.nombre,p.marca,p.cantidad,p.vendedor, c.nombre as categoria,c.id_categoria from producto p join categoria c on p.categoria=c.id_categoria");
+        $query -> execute();
+        $products = $query->fetchALL(PDO::FETCH_OBJ); 
+        return $products; 
     }
 
     public function get($id) {
-        $query = $this->db->prepare("SELECT * FROM task WHERE id = ?");
-        $query->execute([$id]);
-        $task = $query->fetch(PDO::FETCH_OBJ);
-        
-        return $task;
+        $query = $this->db->prepare( "select p.id,p.nombre,p.marca,p.cantidad,p.vendedor, c.nombre as categoria,c.id_categoria from producto p join categoria c on p.categoria=c.id_categoria  WHERE id=?");
+        $query -> execute(array($id));
+        $product = $query->fetch(PDO::FETCH_OBJ);
+        return $product; 
     }
 
     /**
      * Inserta una tarea en la base de datos.
      */
-    public function insert($title, $description, $priority) {
-        $query = $this->db->prepare("INSERT INTO task (titulo, descripcion, prioridad, finalizada) VALUES (?, ?, ?, ?)");
-        $query->execute([$title, $description, $priority, false]);
-
+    public function insert($nombre, $categoria, $cantidad, $marca, $vendedor) {
+        $query = $this->db->prepare("INSERT INTO producto (nombre, categoria, cantidad, marca, vendedor) VALUES (?, ?, ?, ?, ?)");
+        $query->execute([$nombre, $categoria, $cantidad, $marca, $vendedor]);
         return $this->db->lastInsertId();
     }
 
@@ -48,8 +36,8 @@ class TaskModel {
      * Elimina una tarea dado su id.
      */
     function delete($id) {
-        $query = $this->db->prepare('DELETE FROM task WHERE id = ?');
-        $query->execute([$id]);
+        $query = $this->db->prepare("DELETE FROM producto WHERE id=?");
+        $query->execute(array($id,));
     }
 
     public function finalize($id) {

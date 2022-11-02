@@ -6,4 +6,4 @@ Una API REST sencilla para manejar inform
 
 
 ## Pueba con postman
-El endpoint de la API es: http://localhost/carpetalocal/TPE-2/api/products
+El endpoint de la API es: http://localhost/TPE-2/api/products
