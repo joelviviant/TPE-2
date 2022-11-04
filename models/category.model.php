@@ -24,13 +24,10 @@ class TaskModel {
         return $category; 
     }
 
-    /**
-     * Inserta una tarea en la base de datos.
-     */
-    public function insert($title, $description, $priority) {
-        $query = $this->db->prepare("INSERT INTO task (titulo, descripcion, prioridad, finalizada) VALUES (?, ?, ?, ?)");
-        $query->execute([$title, $description, $priority, false]);
-
+    
+    function insert($nombre){
+        $sentencia = $this->db->prepare("INSERT INTO categoria(nombre) VALUES(?)");
+        $sentencia->execute(array($nombre));
         return $this->db->lastInsertId();
     }
 
@@ -40,9 +37,9 @@ class TaskModel {
 
     }
 
-    public function finalize($id) {
-        $query = $this->db->prepare('UPDATE task SET finalizada = 1 WHERE id = ?');
-        $query->execute([$id]);
-        // var_dump($query->errorInfo()); // y eliminar la redireccion
+    function editCategory($id_categoria, $nombre){
+        $sentencia = $this->db->prepare("UPDATE categoria SET nombre=? WHERE id_categoria=?");
+        $sentencia->execute(array($nombre,$id_categoria));
     }
+
 }

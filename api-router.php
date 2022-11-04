@@ -19,8 +19,8 @@ $router->addRoute('products/:ID', 'POST', 'ProductApiController', 'updateVendido
 $router->addRoute('categories', 'GET', 'CategoryApiController', 'getCategories');
 $router->addRoute('categories/:ID', 'GET', 'CategoryApiController', 'getCategory');
 $router->addRoute('categories/:ID', 'DELETE', 'CategoryApiController', 'deleteCategory');
-//$router->addRoute('categories', 'POST', 'TaskApiController', 'insertTask'); 
-
+$router->addRoute('categories', 'POST', 'CategoryApiController', 'insertCategory'); 
+$router->addRoute('categories/:ID', 'PUT', 'CategoryApiController', 'editCategory'); 
 
 // ejecuta la ruta (sea cual sea)
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
