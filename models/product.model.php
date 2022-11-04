@@ -9,7 +9,7 @@ class ProductModel {
     }
 
     public function getAll() {
-        $query = $this->db->prepare( "select p.id,p.nombre,p.marca,p.cantidad,p.vendido, c.nombre as categoria,c.id_categoria from producto p join categoria c on p.categoria=c.id_categoria");
+        $query = $this->db->prepare( "select p.id,p.nombre,p.marca,p.cantidad,p.vendido, c.nombre as categoria,c.id_categoria from producto p join categoria c on p.categoria=c.id_categoria ");
         $query -> execute();
         $products = $query->fetchALL(PDO::FETCH_OBJ); 
         return $products; 
