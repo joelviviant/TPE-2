@@ -19,7 +19,10 @@ class   ProductApiController {
         }
 
     public function getProducts($params = null) {
-        $products = $this->model->getAll();
+        $page = isset($_GET["page"]) ? $_GET["page"] : null;
+        $per_page = isset($_GET["per_page"]) ? $_GET["per_page"] : null;
+        $categoria = isset($_GET["categoria"]) ? $_GET["categoria"] : null;
+        $products = $this->model->getAll($page, $per_page,$categoria);
         $this->view->response($products);
         }
 
@@ -70,19 +73,6 @@ class   ProductApiController {
         }
 
 
-    public function updateVendido($params = null){
-            $data = $this->getData();
-            $id = $params[':ID'];
-            $product = $this->model->get($id);
-            if ($product) {
-                if (empty($data->vendido)){
-                    $this->view->response("Complete los datos", 400);
-                } else {
-                    $this->model->editVendido($id,$data->vendido);
-                    $this->view->response("El producto se editó con éxito con el id=$id", 201);
-                }
-            }else 
-                $this->view->response("El producto con el id=$id no existe", 404);    
-        }
+
 
 }
