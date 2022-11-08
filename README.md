@@ -8,3 +8,4 @@ de un campo vendido exclusivo de la API.
 
 ## Pueba con postman
 El endpoint de la API es: http://localhost/carpetalocal/TPE-2/api/products
+

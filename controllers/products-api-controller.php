@@ -17,12 +17,35 @@ class   ProductApiController {
     private function getData() {
         return json_decode($this->data);
         }
+    
+    public function getColumn($column){
+        switch ($column) {
+            case "id":
+               return "id";
+            case "nombre":
+                return "nombre";   
+            case "categoria":
+                return "c.nombre";
+            case "marca":
+                return "marca";
+            case "vendido":
+                return "vendido";
+            case "cantidad":
+                return "cantidad";   
+            case "id_categoria":
+                return "id_categoria";
+            default:
+                return null;
+        }
 
+    }
     public function getProducts($params = null) {
         $page = isset($_GET["page"]) ? $_GET["page"] : null;
         $per_page = isset($_GET["per_page"]) ? $_GET["per_page"] : null;
         $categoria = isset($_GET["categoria"]) ? $_GET["categoria"] : null;
-        $products = $this->model->getAll($page, $per_page,$categoria);
+        $sort = isset($_GET["sort"]) ?$this->getColumn(strtolower($_GET["sort"])) : null;
+        $order = isset($_GET["order"]) ? $_GET["order"] : "ASC";
+        $products = $this->model->getAll($page, $per_page,$categoria,$sort,$order);
         $this->view->response($products);
         }
 

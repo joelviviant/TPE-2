@@ -8,14 +8,17 @@ class ProductModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_cart;charset=utf8', 'root', '');
     }
 
-    public function getAll($page,$per_page,$categoria) {
+    public function getAll($page,$per_page,$categoria,$sort,$order) {
         $query =  "select p.id,p.nombre,p.marca,p.cantidad,p.vendido, c.nombre as categoria,c.id_categoria from producto p join categoria c on p.categoria=c.id_categoria  ";
         if(!is_null($categoria)){
-            $query=$query. "WHERE lower(c.nombre) = lower('$categoria')";
+            $query.= "WHERE lower(c.nombre) = lower('$categoria')";
+        }
+        if(!is_null($sort)){
+            $query.="ORDER BY $sort $order";
         }
         if( !is_null($page) && !is_null($per_page)){
             $limit= ($page-1)*$per_page;
-            $query=$query. "LIMIT $limit, $per_page";
+            $query.= "LIMIT $limit, $per_page";
         }
         $query = $this->db->prepare( $query);
         $query -> execute();
