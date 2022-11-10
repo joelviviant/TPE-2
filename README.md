@@ -8,7 +8,7 @@
 ## Pueba con postman
 El endpoint de la API es: http://localhost/carpetalocal/TPE-2/api/products
 
-<<<<<<< HEAD
+
 ## ENDPOINTS
 - /products
 - /products/ID
