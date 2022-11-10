@@ -10,13 +10,13 @@ El endpoint de la API es: http://localhost/carpetalocal/TPE-2/api/products
 
 ENDPOINTS
 
-/products
-/products/ID
-/categories
-/caetgories/ID
+-/products
+-/products/ID
+-/categories
+-/caetgories/ID
 
 VERBOS
-GET
-POST
-PUT 
-DELETE
+-GET
+-POST
+-PUT 
+-DELETE
